@@ -5,6 +5,7 @@ class Kanban extends Component {
   render() {
     return (
       <div className="app">
+        <span to='/new' className="float-button">+</span>
         <List id="todo" title="To Do" cards={
           this.props.cards.filter((card) => card.status === "todo")
         } />

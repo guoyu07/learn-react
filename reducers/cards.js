@@ -59,9 +59,9 @@ const card = (state, action) => {
         id: action.id,
         title: action.title,
         description: action.description,
-        status: 'todo',
+        status: action.status || 'todo',
         showDetails: true,
-        color: 'red',
+        color: action.color || 'red',
         tasks: [],
       }
     case ActionTypes.CARD_TOGGLE_DETAIL:

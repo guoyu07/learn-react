@@ -1,12 +1,14 @@
 import * as types from '../constants/ActionTypes';
 import uuid from 'uuid';
 
-export function addCard(title, description) {
+export function addCard(title, description, status, color) {
   return {
     type: types.CARD_ADD,
     id: uuid.v4(),
     title,
     description,
+    status,
+    color,
   }
 }
 
