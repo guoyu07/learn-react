@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux'
 import { addCard } from '../actions/card';
+import { toggleAddForm } from '../actions/kanban';
 
 class CardForm extends Component {
   render() {
@@ -9,7 +10,10 @@ class CardForm extends Component {
     return (
       <div>
         <div className="card big">
-          <form onSubmit={handleSubmit((v) => this.props.dispatch(addCard(v.title, v.description, v.status, v.color)))}>
+        <form onSubmit={handleSubmit((v) => {
+          this.props.dispatch(addCard(v.title, v.description, v.status, v.color));
+          this.props.dispatch(toggleAddForm());
+        })}>
             <Field name="title" placeholder="Title" component="input" type="text" required={true} autoFocus={true} />
             <Field name="description" placeholder="Description" component="textarea" required={true} />
             <label htmlFor="status">Status</label>
@@ -25,7 +29,7 @@ class CardForm extends Component {
             </div>
           </form>
         </div>
-        <div className="overlay"></div>
+        <div className="overlay" onClick={() => {this.props.dispatch(toggleAddForm())}}></div>
       </div>
     );
   }

@@ -6,3 +6,5 @@ export const CARD_TOGGLE_DETAIL = 'CARD_TOGGLE_DETAIL';
 export const TASK_ADD = 'TASK_ADD';
 export const TASK_TOGGLE = 'TASK_TOGGLE';
 export const TASK_DELETE = 'TASK_DELETE';
+
+export const KANBAN_TOGGLE_ADD_FORM = 'KANBAN_TOGGLE_ADD_FORM';
