@@ -1,29 +1,34 @@
 import React, { Component, PropTypes } from 'react';
 import List from './List';
 
-class KanbanBoard extends Component {
+class Kanban extends Component {
   render() {
     return (
       <div className="app">
-        <List id="todo" title="To Do" taskCallbacks={this.props.taskCallbacks} cards={
+        <List id="todo" title="To Do" cards={
           this.props.cards.filter((card) => card.status === "todo")
-        } />
-        <List id="in-progress" title="In Progress" taskCallbacks={this.props.taskCallbacks} cards={
+        }
+          taskCallbacks={this.props.taskCallbacks}
+        />
+        <List id="in-progress" title="In Progress" cards={
           this.props.cards.filter(
             (card) => card.status === "in-progress"
           )
-        } />
-        <List id="done" title="Done" taskCallbacks={this.props.taskCallbacks} cards={
+        }
+          taskCallbacks={this.props.taskCallbacks}
+        />
+        <List id="done" title="Done" cards={
           this.props.cards.filter((card) => card.status === "done")
-        } />
+        }
+          taskCallbacks={this.props.taskCallbacks}
+        />
       </div>
     );
   }
 }
 
-KanbanBoard.propTypes = {
+Kanban.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.object),
-  taskCallbacks: PropTypes.object
 };
 
-export default KanbanBoard;
+export default Kanban;

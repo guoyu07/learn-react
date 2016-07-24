@@ -1,5 +1,5 @@
 var config = {
-  entry:  __dirname + "/App.js",
+  entry:  __dirname + "/index.js",
   output: {
     path: __dirname,
     filename: "bundle.js"

@@ -14,20 +14,9 @@ let titlePropType = (props, propName, componentName) => {
 };
 
 class Card extends Component {
-  constructor() {
-    super(...arguments);
-    this.state = {
-      showDetails: true
-    };
-  }
-
-  toggleDetails() {
-      this.setState({showDetails: !this.state.showDetails});
-  }
-
   render() {
     let cardDetails;
-    if (this.state.showDetails) {
+    if (this.props.showDetails) {
       cardDetails = (
         <div className="card_detail">
           <span dangerouslySetInnerHTML={{__html:marked(this.props.description)}} />
@@ -47,8 +36,8 @@ class Card extends Component {
     return (
       <div className="card">
         <div style={sideColor} />
-        <div className={ this.state.showDetails ? "card__title card__title--is-open" : "card__title" } onClick={
-          () => { this.toggleDetails() }
+        <div className={ this.props.showDetails ? "card__title card__title--is-open" : "card__title" } onClick={
+          () => { this.props.taskCallbacks.toggleDetails(this.props.id) }
         }>{this.props.title}</div>
         { cardDetails }
       </div>
