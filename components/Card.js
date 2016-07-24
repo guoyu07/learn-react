@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import CheckList from './CheckList';
 import marked from 'marked';
+import { connect } from 'react-redux';
+import { toggleCardDetail } from '../actions/card';
 
 let titlePropType = (props, propName, componentName) => {
   if (props[propName]) {
@@ -20,7 +22,7 @@ class Card extends Component {
       cardDetails = (
         <div className="card_detail">
           <span dangerouslySetInnerHTML={{__html:marked(this.props.description)}} />
-          <CheckList cardId={this.props.id} tasks={this.props.tasks} taskCallbacks={this.props.taskCallbacks} />
+          <CheckList cardId={this.props.id} tasks={this.props.tasks} />
         </div>
       );
     };
@@ -37,7 +39,7 @@ class Card extends Component {
       <div className="card">
         <div style={sideColor} />
         <div className={ this.props.showDetails ? "card__title card__title--is-open" : "card__title" } onClick={
-          () => { this.props.taskCallbacks.toggleDetails(this.props.id) }
+          () => { this.props.dispatch(toggleCardDetail(this.props.id)) }
         }>{this.props.title}</div>
         { cardDetails }
       </div>
@@ -51,7 +53,6 @@ Card.propTypes = {
   description: PropTypes.string,
   color: PropTypes.string,
   tasks: PropTypes.arrayOf(PropTypes.object),
-  taskCallbacks: PropTypes.object,
 };
 
-export default Card;
+export default connect()(Card);

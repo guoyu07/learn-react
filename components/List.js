@@ -5,10 +5,10 @@ class List extends Component {
   render() {
     var cards = this.props.cards.map((card) => {
       return <Card id={card.id}
-        taskCallbacks={this.props.taskCallbacks}
         key={card.id}
         title={card.title}
         description={card.description}
+        showDetails={card.showDetails}
         color={card.color}
         tasks={card.tasks} />
     });

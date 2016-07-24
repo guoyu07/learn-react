@@ -8,17 +8,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    taskCallbacks: {
-      toggleDetails: (cardId) => {
-        dispatch(CardActions.toggleCardDetail(cardId))
-      },
-      addTask: (title, detail) => {console.log(this)},
-      deleteTask: (cardId, taskId, taskIndex) => {console.log(this)},
-      toggleTask: (cardId, taskId, taskIndex) => {console.log(this)},
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Kanban);
+export default connect(mapStateToProps)(Kanban);

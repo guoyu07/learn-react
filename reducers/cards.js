@@ -66,6 +66,40 @@ const card = (state, action) => {
   }
 };
 
+const cardTask = (state, action) => {
+  if (state.id !== action.cardId) {
+    return state;
+  }
+
+  switch (action.type) {
+    case ActionTypes.TASK_ADD:
+      state = Object.assign({}, state);
+      state.tasks.push({
+          id: action.id,
+          name: action.name,
+          done: action.done,
+      });
+
+      return state;
+    case ActionTypes.TASK_TOGGLE:
+      return Object.assign({}, state, {
+        tasks: state.tasks.map((task) => {
+          if (task.id !== action.id) {
+            return task;
+          }
+
+          return Object.assign({}, task, { done: !task.done });
+        })
+      });
+    case ActionTypes.TASK_DELETE:
+      return Object.assign({}, state, {
+        tasks: state.tasks.filter((task) => task.id !== state.id)
+      });
+    default:
+      return state;
+  }
+};
+
 export default (state = debugState, action) => {
   switch (action.type) {
     case ActionTypes.CARD_ADD:
@@ -75,6 +109,10 @@ export default (state = debugState, action) => {
       ];
     case ActionTypes.CARD_TOGGLE_DETAIL:
       return state.map(c => card(c, action));
+    case ActionTypes.TASK_TOGGLE:
+    case ActionTypes.TASK_DELETE:
+    case ActionTypes.TASK_ADD:
+      return state.map(c => cardTask(c, action));
     default:
       return state;
   }

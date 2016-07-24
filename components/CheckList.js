@@ -1,21 +1,21 @@
 import React, { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
+import { addTask, deleteTask, toggleTask } from '../actions/task';
 
 class CheckList extends Component {
-  checkInputKeyPress(e){
-    if(e.key === 'Enter'){
-      this.props.taskCallbacks.addTask(this.props.cardId, e.target.value);
-      e.target.value = '';
-    }
-  }
-
   render() {
+    let cardId = this.props.cardId;
     let tasks = this.props.tasks.map((task, taskIndex) => (
       <li key={task.id} className="checklist__task">
         <input type="checkbox" defaultChecked={task.done}
-          onChange={this.props.taskCallbacks.toggleTask.bind(this, this.props.cardId, task.id, taskIndex)} />
+          onChange={() => this.props.dispatch(toggleTask(cardId, task.id, taskIndex))}
+        />
         {task.name}
         <a href="#" className="checklist__task--remove"
-          onClick={this.props.taskCallbacks.deleteTask.bind(this, this.props.cardId, task.id, taskIndex)} />
+          onClick={(e) => {
+            e.stopPropagation();
+            this.props.dispatch(deleteTask(cardId, task.id, taskIndex))
+          }} />
       </li>
     ));
 
@@ -23,8 +23,14 @@ class CheckList extends Component {
       <div className="checklist">
         <ul>{tasks}</ul>
         <input type="text" className="checklist__task--add-task"
-          onKeyPress={this.checkInputKeyPress.bind(this)}
-          placeholder="Type then hit Enter to add a task" />
+          placeholder="Type then hit Enter to add a task"
+          onKeyPress={ e => {
+            if (e.key === 'Enter') {
+              this.props.dispatch(addTask(cardId, e.target.value));
+              e.target.value = '';
+            }
+          }}
+        />
       </div>
     );
   }
@@ -33,7 +39,6 @@ class CheckList extends Component {
 CheckList.propTypes = {
   cardId: PropTypes.number,
   tasks: PropTypes.arrayOf(PropTypes.object),
-  taskCallbacks: PropTypes.object,
 };
 
-export default CheckList;
+export default connect()(CheckList);
