@@ -1,11 +1,10 @@
 import * as types from '../constants/ActionTypes';
-
-let nextCardId = 0;
+import uuid from 'uuid';
 
 export function addCard(title, description) {
   return {
     type: types.CARD_ADD,
-    id: nextCardId++,
+    id: uuid.v4(),
     title,
     description,
   }
@@ -30,4 +29,7 @@ export function toggleCardDetail(cardId) {
     type: types.CARD_TOGGLE_DETAIL,
     cardId,
   }
+}
+
+export function toggleCardDragStart(cardId) {
 }

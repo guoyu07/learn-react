@@ -26,19 +26,14 @@ ul {
 }
 
 .app {
-  white-space: nowrap;
-  height: 100%;
+  display: -webkit-flex; /* Safari */
+  display: flex;
+  flex-directiona: column;
 }
 
 .list {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  white-space: normal;
-  height: 100%;
-  width: 33%;
+  flex: 1;
   padding: 0 20px;
-  overflow: auto;
 }
 
 .list:not(:last-child):after{

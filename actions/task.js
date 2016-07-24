@@ -1,12 +1,11 @@
 import * as types from '../constants/ActionTypes';
-
-let nextTaskId = 0;
+import uuid from 'uuid';
 
 export function addTask(cardId, name) {
   return {
     type: types.TASK_ADD,
     cardId,
-    id: nextTaskId++,
+    id: uuid.v4(),
     name,
     done: false,
   }

@@ -36,7 +36,9 @@ class Card extends Component {
       backgroundColor: this.props.color,
     };
     return (
-      <div className="card">
+      <div className="card" draggable="true" onDragStart={(e) => {
+        e.dataTransfer.setData('text', this.props.id);
+      }}>
         <div style={sideColor} />
         <div className={ this.props.showDetails ? "card__title card__title--is-open" : "card__title" } onClick={
           () => { this.props.dispatch(toggleCardDetail(this.props.id)) }
@@ -48,7 +50,7 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   title: titlePropType,
   description: PropTypes.string,
   color: PropTypes.string,
