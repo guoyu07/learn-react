@@ -16,7 +16,7 @@ class CheckList extends Component {
       return <li key={task.id} className="checklist__task" style={style}
           onClick={() => this.props.dispatch(toggleTask(cardId, task.id, taskIndex))}
         >
-        <input type="checkbox" checked={task.done} />
+        <input type="checkbox" checked={task.done} readOnly={true} />
         {task.name}
         <a href="#" className="checklist__task--remove"
           onClick={(e) => {

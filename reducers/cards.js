@@ -100,12 +100,15 @@ const cardTask = (state, action) => {
 
   switch (action.type) {
     case ActionTypes.TASK_ADD:
-      let newState = Object.assign({}, state);
-      newState.tasks.push({
+      let newState = Object.assign({}, state, {tasks: state.tasks || []});
+      newState.tasks = [
+        ...newState.tasks,
+        {
           id: action.id,
           name: action.name,
           done: action.done,
-      });
+        }
+      ];
 
       return newState;
     case ActionTypes.TASK_TOGGLE:
