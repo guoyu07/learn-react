@@ -5,11 +5,18 @@ import { addTask, deleteTask, toggleTask } from '../actions/task';
 class CheckList extends Component {
   render() {
     let cardId = this.props.cardId;
-    let tasks = this.props.tasks.map((task, taskIndex) => (
-      <li key={task.id} className="checklist__task">
-        <input type="checkbox" defaultChecked={task.done}
-          onChange={() => this.props.dispatch(toggleTask(cardId, task.id, taskIndex))}
-        />
+    let tasks = this.props.tasks.map((task, taskIndex) => {
+      let style;
+      if (task.done) {
+        style = {
+          textDecoration: 'line-through',
+        };
+      }
+
+      return <li key={task.id} className="checklist__task" style={style}
+          onClick={() => this.props.dispatch(toggleTask(cardId, task.id, taskIndex))}
+        >
+        <input type="checkbox" checked={task.done} />
         {task.name}
         <a href="#" className="checklist__task--remove"
           onClick={(e) => {
@@ -17,7 +24,7 @@ class CheckList extends Component {
             this.props.dispatch(deleteTask(cardId, task.id, taskIndex))
           }} />
       </li>
-    ));
+    });
 
     return (
       <div className="checklist">
