@@ -100,14 +100,14 @@ const cardTask = (state, action) => {
 
   switch (action.type) {
     case ActionTypes.TASK_ADD:
-      state = Object.assign({}, state);
-      state.tasks.push({
+      let newState = Object.assign({}, state);
+      newState.tasks.push({
           id: action.id,
           name: action.name,
           done: action.done,
       });
 
-      return state;
+      return newState;
     case ActionTypes.TASK_TOGGLE:
       return Object.assign({}, state, {
         tasks: state.tasks.map((task) => {
@@ -120,7 +120,7 @@ const cardTask = (state, action) => {
       });
     case ActionTypes.TASK_DELETE:
       return Object.assign({}, state, {
-        tasks: state.tasks.filter((task) => task.id !== state.id)
+        tasks: state.tasks.filter((task) => task.id !== action.id)
       });
     default:
       return state;

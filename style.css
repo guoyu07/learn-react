@@ -72,7 +72,9 @@ ul {
 .checklist__task--remove:after {
   display: inline-block;
   color: #d66;
-  content: "+";
+  content: "x";
+  font-size: 1.3em;
+  padding: 5px;
 }
 
 .checklist__task--add-task {

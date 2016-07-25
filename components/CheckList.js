@@ -13,7 +13,7 @@ class CheckList extends Component {
         {task.name}
         <a href="#" className="checklist__task--remove"
           onClick={(e) => {
-            e.stopPropagation();
+            e.preventDefault();
             this.props.dispatch(deleteTask(cardId, task.id, taskIndex))
           }} />
       </li>
