@@ -5,7 +5,7 @@ import KanbanContainer from './containers/KanbanContainer';
 import { createStore } from 'redux';
 import KanbanApp from './reducers';
 
-let store = createStore(KanbanApp, window.devToolsExtension());
+let store = createStore(KanbanApp, window.devToolsExtension && window.devToolsExtension());
 
 render(
   <Provider store={store}>
